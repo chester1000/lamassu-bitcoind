@@ -2,6 +2,7 @@
 
 var RpcClient = require('bitcore').RpcClient;
 var fs        = require('fs');
+var _         = require('lodash');
 
 
 exports.NAME = 'Bitcoind';
@@ -25,7 +26,7 @@ function initRpc() {
   };
 
   rpc = new RpcClient(rpcConfig);
-};
+}
 
 
 // initialize Rpc only after 1st configuration is received
@@ -41,7 +42,7 @@ function richError(msg, name) {
   var err = new Error(msg);
   err.name = name;
   return err;
-};
+}
 
 
 /*
@@ -62,7 +63,7 @@ function parseConf(confPath) {
   }
 
   return res;
-};
+}
 
 
 // We want a balance that includes all spends (0 conf) but only deposits that
@@ -101,6 +102,6 @@ exports.sendBitcoins = function sendBitcoins(address, satoshis, fee, callback) {
     }
 
     // is res.result === txHash ?
-    callback(null, res.result);
+    callback(null, result.result);
   });
 };
